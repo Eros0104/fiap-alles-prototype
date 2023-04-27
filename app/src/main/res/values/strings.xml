@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="password">Password</string>
+    <string name="username">CPF</string>
+    <string name="login">Login</string>
+    <string name="statement">Extrato</string>
+    <string name="recharge">Recarregar</string>
+    <string name="card">Cartão</string>
+    <string name="welcome">Bem vindo!</string>
+    <string name="balance">Saldo: R$543,00</string>
+</resources>
