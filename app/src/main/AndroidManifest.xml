@@ -19,7 +19,7 @@
             android:name=".RechargeActivity"
             android:exported="false" />
         <activity
-            android:name=".BalanceActivity"
+            android:name=".StatementActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

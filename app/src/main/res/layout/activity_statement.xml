@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RechargeActivity"
+    tools:context=".StatementActivity"
     android:padding="20dp">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/recharge"
+        android:text="@string/statement"
         style="@style/title"
         app:layout_constraintTop_toTopOf="parent"
         />
