@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             val password = etPassword.text.toString()
 
             if (username == "user" && password == "123") {
-                val intent = Intent(this, WelcomeActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             }
         }
