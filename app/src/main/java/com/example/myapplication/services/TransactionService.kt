@@ -7,9 +7,9 @@ import kotlin.random.Random
 val movementsDescriptions = listOf<String>("Market", "Taxi", "Food", "Games")
 const val numberOfMovements = 30;
 const val minValue = 5.0;
-const val maxValue = 80.0;
+const val maxValue = 100.0;
 
-class TransactionService {
+object TransactionService {
     private val transactions = mutableListOf<Transaction>()
 
     init {
@@ -48,5 +48,19 @@ class TransactionService {
 
     fun getTransactions(): MutableList<Transaction> {
         return transactions
+    }
+
+    fun getBalance(): Double {
+        var total = 0.0;
+
+        transactions.forEach {transaction ->
+            if (transaction.transactionType == TransactionType.CREDIT) {
+                total += transaction.value
+            } else {
+                total -= transaction.value
+            }
+        }
+
+        return total;
     }
 }

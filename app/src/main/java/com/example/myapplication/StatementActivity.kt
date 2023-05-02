@@ -19,7 +19,7 @@ class StatementActivity : AppCompatActivity() {
 
     private fun fetchTransactions() {
         val recyclerView = findViewById<RecyclerView>(R.id.transactionRecyclerView)
-        val transactionService = TransactionService()
+        val transactionService = TransactionService
         val transactions = transactionService.getTransactions()
 
         recyclerView.apply {
