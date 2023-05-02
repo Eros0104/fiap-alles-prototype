@@ -7,4 +7,6 @@
     <color name="primary">#854AD9</color>
     <color name="dark_violet">#4E0FA6</color>
     <color name="light_violet">#9F66D9</color>
+    <color name="red">#9E0000</color>
+    <color name="green">#00A300</color>
 </resources>

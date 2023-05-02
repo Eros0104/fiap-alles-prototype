@@ -4,28 +4,27 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.services.MovementService
+import com.example.myapplication.services.TransactionService
 
 class StatementActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statement)
 
-        fetchMovements()
+        fetchTransactions()
         configGoBackButton()
     }
 
-    private fun fetchMovements() {
-        val recyclerView = findViewById<RecyclerView>(R.id.movementRecyclerView)
-        val movementService = MovementService()
-        val movements = movementService.getMovements()
+    private fun fetchTransactions() {
+        val recyclerView = findViewById<RecyclerView>(R.id.transactionRecyclerView)
+        val transactionService = TransactionService()
+        val transactions = transactionService.getTransactions()
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@StatementActivity)
-            adapter = MovementAdapter(movements)
+            adapter = TransactionAdapter(transactions, this@StatementActivity)
         }
     }
 
