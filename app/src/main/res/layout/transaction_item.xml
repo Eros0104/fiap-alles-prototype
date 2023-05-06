@@ -5,20 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="10dp"
+    android:paddingVertical="10dp"
+    android:paddingHorizontal="16dp"
     android:background="@color/white"
     >
 
-    <TextView
-        android:id="@+id/tv_movement_description"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        tools:text="Hello"
-        android:layout_alignParentLeft="true"/>
-        />
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_movement_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:text="Lorem Ipsum" />
+
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/grey"
+            tools:text="01/04/1999"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_movement_value"
@@ -27,6 +43,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         tools:text="R$ 20.00" />
 
 </RelativeLayout >

@@ -2,6 +2,7 @@ package com.example.myapplication.services
 
 import com.example.myapplication.models.Transaction
 import com.example.myapplication.models.TransactionType
+import java.time.LocalDateTime
 import kotlin.random.Random
 
 val movementsDescriptions = listOf<String>("Market", "Taxi", "Food", "Games")
@@ -18,11 +19,13 @@ object TransactionService {
     }
 
     private fun generateCredit () {
+        val id = (transactions.size + 1).toString()
         val credit = Transaction(
-            "credit",
+            id,
             2000.0,
-            "Credit Account",
-            TransactionType.CREDIT
+            "Company",
+            TransactionType.CREDIT,
+            LocalDateTime.now().minusDays(numberOfMovements.toLong())
         )
 
         transactions.add(credit)
@@ -34,12 +37,14 @@ object TransactionService {
             val randomMovementDescription = movementsDescriptions[randomIndex]
             val randomValue = Random.nextDouble(minValue, maxValue)
             val movementId = index.toString()
+            val date = LocalDateTime.now().minusDays(index.toLong())
 
             val movement = Transaction(
                 movementId,
                 randomValue,
                 randomMovementDescription,
-                TransactionType.DEBIT
+                TransactionType.DEBIT,
+                date
             );
 
             transactions.add(movement)
@@ -47,7 +52,7 @@ object TransactionService {
     }
 
     fun getTransactions(): MutableList<Transaction> {
-        return transactions
+        return transactions.sortedByDescending  {it.date}.toMutableList()
     }
 
     fun getBalance(): Double {
@@ -62,5 +67,20 @@ object TransactionService {
         }
 
         return total;
+    }
+
+    fun getRecharges(): MutableList<Transaction> {
+        return transactions.filter {transaction ->
+            transaction.transactionType === TransactionType.CREDIT
+        }.sortedByDescending { it.date}.toMutableList()
+    }
+
+    fun recharge(value: Double, description: String) {
+        val id = (transactions.size + 1).toString()
+        val newTransaction = Transaction(
+            id, value, description, TransactionType.CREDIT, LocalDateTime.now()
+        )
+
+        transactions.add(newTransaction)
     }
 }

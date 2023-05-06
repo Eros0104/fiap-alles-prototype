@@ -11,4 +11,9 @@
     <string name="Title">Login</string>
     <string name="login_sub_title">Insira suas credenciais abaixo (username = \"user\", password = \"123\")</string>
     <string name="go_back">Voltar</string>
+    <string name="rechargeWithPix">Recarregar Saldo via Pix</string>
+    <string name="balanceToRecharge">Saldo a recarregar:</string>
+    <string name="last_recharges">Últimas recargas:</string>
+    <string name="value">Valor</string>
+    <string name="you">Você</string>
 </resources>

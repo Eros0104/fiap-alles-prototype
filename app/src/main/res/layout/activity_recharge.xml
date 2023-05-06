@@ -8,7 +8,7 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/tv_login_title"
+        android:id="@+id/tv_recharge_title"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +16,65 @@
         style="@style/title"
         app:layout_constraintTop_toTopOf="parent"
         />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/btnGoBack"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recharge_title">
+            <TextView
+                android:id="@+id/tv_recharge_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/balanceToRecharge"
+                style="@style/sub_title"
+                app:layout_constraintTop_toTopOf="parent"/>
+    
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                style="@style/TextInputLayout"
+                tools:layout_editor_absoluteX="28dp">
+    
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/value"
+                    android:inputType="numberDecimal"
+                    style="@style/TextInputEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
+    
+            <Button
+                android:id="@+id/btnRecharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:minHeight="56dp"
+                android:text="@string/rechargeWithPix"
+                 />
+    
+            <TextView
+                android:id="@+id/tv_last_recharges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/last_recharges"
+                style="@style/sub_title"
+                />
+    
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/transactionRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginVertical="16dp"
+                />
+        </LinearLayout>
 
     <Button
         android:id="@+id/btnGoBack"
@@ -25,6 +84,6 @@
         android:minHeight="56dp"
         android:text="@string/go_back"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="20dp" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,8 +22,13 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        setBalance()
         setButtons()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        setBalance()
     }
 
     private fun setBalance() {
@@ -33,8 +38,7 @@ class HomeActivity : AppCompatActivity() {
         nf.maximumFractionDigits = 2
         nf.currency = Currency.getInstance("BRL");
 
-
-        val balance = tvBalance.text.toString() + " "
+        val balance = getString(R.string.balance) + " "
         val balanceValue = nf.format(transactionService.getBalance())
         val styledString = SpannableStringBuilder().bold { append(balance) }.append(balanceValue)
 
