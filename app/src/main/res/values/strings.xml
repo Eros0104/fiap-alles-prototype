@@ -16,4 +16,7 @@
     <string name="last_recharges">Últimas recargas:</string>
     <string name="value">Valor</string>
     <string name="you">Você</string>
+    <string name="cc_layout_number">0000 0000 0000</string>
+    <string name="cc_layout_name">John Doe</string>
+    <string name="card_page_description">Cadastre o cartão Alle em\nsua Carteira digital e em\nseus apps preferidos!\nPs. Funciona nas catracas\nde metro também ;D\n</string>
 </resources>

@@ -29,4 +29,8 @@
     <style name="TextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:background">@drawable/bg_text_field</item>
     </style>
+
+    <style name="credit_card">
+        <item name="android:background">@drawable/bg_credit_card</item>
+    </style>
 </resources>
