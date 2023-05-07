@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="password">Password</string>
-    <string name="username">CPF</string>
+    <string name="password">Password (123)</string>
+    <string name="username">Usuário (john)</string>
     <string name="login">Login</string>
     <string name="statement">Extrato</string>
     <string name="recharge">Recarregar</string>
@@ -19,4 +19,5 @@
     <string name="cc_layout_number">0000 0000 0000</string>
     <string name="cc_layout_name">John Doe</string>
     <string name="card_page_description">Cadastre o cartão Alle em\nsua Carteira digital e em\nseus apps preferidos!\nPs. Funciona nas catracas\nde metro também ;D\n</string>
+    <string name="Alle">Alle</string>
 </resources>
