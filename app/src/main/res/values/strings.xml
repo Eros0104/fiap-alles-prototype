@@ -20,4 +20,11 @@
     <string name="cc_layout_name">John Doe</string>
     <string name="card_page_description">Cadastre o cartão Alle em\nsua Carteira digital e em\nseus apps preferidos!\nPs. Funciona nas catracas\nde metro também ;D\n</string>
     <string name="Alle">Alle</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Galeria</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="nav_header_desc">header desc</string>
+    <string name="nav_header_title">header title</string>
+    <string name="nav_header_subtitle">header subtitle</string>
+    <string name="action_settings">Settings</string>
 </resources>
