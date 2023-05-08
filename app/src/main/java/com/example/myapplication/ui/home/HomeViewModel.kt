@@ -6,15 +6,13 @@ import androidx.lifecycle.ViewModel
 
 class HomeViewModel: ViewModel() {
 
-    private val _textWelcome = MutableLiveData<String>().apply {
-        value = ""
-    }
-
     private val _textBalance = MutableLiveData<String>().apply {
         value = ""
     }
 
-    val textWelcome: LiveData<String> = _textWelcome
-
     val textBalance: LiveData<String> = _textBalance
+
+    fun setTextBalance(value: String) {
+        _textBalance.value = value
+    }
 }
