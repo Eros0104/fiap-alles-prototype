@@ -7,7 +7,7 @@
     <string name="recharge">Recarregar</string>
     <string name="card">Cartão</string>
     <string name="welcome">Bem vindo!</string>
-    <string name="balance">Saldo:</string>
+    <string name="balance">Saldo disponível</string>
     <string name="Title">Login</string>
     <string name="login_sub_title">Insira suas credenciais abaixo (username = \"user\", password = \"123\")</string>
     <string name="go_back">Voltar</string>

@@ -41,12 +41,12 @@ class HomeFragment : Fragment() {
 
         val root: View = binding.root
 
-        val txtBalance: TextView = binding.txtBalance
+        val txtBalance: TextView = binding.txtBalanceValue
         viewModel.textBalance.observe(viewLifecycleOwner) {
             txtBalance.text = it
         }
 
-        viewModel.setTextBalance(getString(R.string.balance))
+        viewModel.setTextBalance("")
 
         setButtons()
 
@@ -67,10 +67,9 @@ class HomeFragment : Fragment() {
         nf.maximumFractionDigits = 2
         nf.currency = Currency.getInstance("BRL");
 
-        val balance = getString(R.string.balance) + " "
         val balanceValue = nf.format(transactionService.getBalance())
 
-        viewModel.setTextBalance(balance + balanceValue)
+        viewModel.setTextBalance(balanceValue)
     }
 
     private fun setButtons() {
