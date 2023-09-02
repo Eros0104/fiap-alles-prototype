@@ -1,7 +1,9 @@
 package com.example.myapplication.services
 
+import com.example.myapplication.models.Category
+import com.example.myapplication.models.CreditTransaction
+import com.example.myapplication.models.DebitTransaction
 import com.example.myapplication.models.Transaction
-import com.example.myapplication.models.TransactionType
 import java.time.LocalDateTime
 import kotlin.random.Random
 
@@ -20,12 +22,12 @@ object TransactionService {
 
     private fun generateCredit () {
         val id = (transactions.size + 1).toString()
-        val credit = Transaction(
+        val credit = CreditTransaction(
             id,
             2000.0,
             "Company",
-            TransactionType.CREDIT,
-            LocalDateTime.now().minusDays(numberOfMovements.toLong())
+            LocalDateTime.now().minusDays(numberOfMovements.toLong()),
+            Category.RESTAURANT
         )
 
         transactions.add(credit)
@@ -39,11 +41,10 @@ object TransactionService {
             val movementId = index.toString()
             val date = LocalDateTime.now().minusDays(index.toLong())
 
-            val movement = Transaction(
+            val movement = DebitTransaction(
                 movementId,
                 randomValue,
                 randomMovementDescription,
-                TransactionType.DEBIT,
                 date
             );
 
@@ -59,7 +60,7 @@ object TransactionService {
         var total = 0.0;
 
         transactions.forEach {transaction ->
-            if (transaction.transactionType == TransactionType.CREDIT) {
+            if (transaction is CreditTransaction) {
                 total += transaction.value
             } else {
                 total -= transaction.value
@@ -71,14 +72,14 @@ object TransactionService {
 
     fun getRecharges(): MutableList<Transaction> {
         return transactions.filter {transaction ->
-            transaction.transactionType === TransactionType.CREDIT
+            transaction is CreditTransaction
         }.sortedByDescending { it.date}.toMutableList()
     }
 
     fun recharge(value: Double, description: String) {
         val id = (transactions.size + 1).toString()
-        val newTransaction = Transaction(
-            id, value, description, TransactionType.CREDIT, LocalDateTime.now()
+        val newTransaction = CreditTransaction(
+            id, value, description, LocalDateTime.now(), Category.FREE
         )
 
         transactions.add(newTransaction)

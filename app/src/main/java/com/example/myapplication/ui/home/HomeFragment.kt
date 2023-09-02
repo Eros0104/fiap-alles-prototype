@@ -53,6 +53,12 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        setBalance()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -65,7 +71,7 @@ class HomeFragment : Fragment() {
         val transactionService = TransactionService
         val nf: NumberFormat = NumberFormat.getCurrencyInstance()
         nf.maximumFractionDigits = 2
-        nf.currency = Currency.getInstance("BRL");
+        nf.currency = Currency.getInstance("BRL")
 
         val balanceValue = nf.format(transactionService.getBalance())
 
