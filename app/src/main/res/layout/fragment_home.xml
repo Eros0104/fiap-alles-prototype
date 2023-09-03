@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             app:cardElevation="10dp"
             app:cardCornerRadius="8dp"
-            android:layout_margin="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
             app:cardBackgroundColor="#FFFFFF">
 
             <!-- Use a vertical LinearLayout to display items vertically -->
@@ -48,6 +49,69 @@
                     android:layout_height="wrap_content"
                     android:text="R$ 100,00"
                     android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="8dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/balance_category_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="8dp"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <!-- Use a vertical LinearLayout to display items vertically -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/txt_balance_categories_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/balance_categories"
+                    android:textSize="16sp"
+                    android:layout_marginVertical="8dp"/>
+
+                <TextView
+                    android:id="@+id/txt_market_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 100,00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="8dp"/>
+
+                <TextView
+                    android:id="@+id/txt_restaurant_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 100,00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="8dp"/>
+
+                <TextView
+                    android:id="@+id/txt_transport_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 100,00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="8dp"/>
+
+                <TextView
+                    android:id="@+id/txt_general_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 100,00"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginVertical="8dp"/>
             </LinearLayout>

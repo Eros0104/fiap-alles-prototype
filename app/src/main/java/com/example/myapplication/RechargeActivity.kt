@@ -21,7 +21,7 @@ class RechargeActivity : AppCompatActivity() {
 
     private fun fetchTransactions() {
         val recyclerView = findViewById<RecyclerView>(R.id.transactionRecyclerView)
-        val transactions = transactionService.getRecharges()
+        val transactions = transactionService.getCreditTransactions()
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@RechargeActivity)

@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.models.DebitTransaction
 import com.example.myapplication.models.Transaction
+import com.example.myapplication.models.TransactionType
 
 import java.time.format.DateTimeFormatter
 
@@ -44,7 +44,7 @@ class TransactionViewHolder(itemView: View, val context: Context): RecyclerView.
         val mathSign: String
         val color: Int
 
-        if (transaction is DebitTransaction) {
+        if (transaction.transactionType == TransactionType.DEBIT) {
             mathSign = "-"
             color = context.getColor(R.color.red)
         } else {
