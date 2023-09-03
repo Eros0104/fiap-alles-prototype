@@ -6,13 +6,18 @@ import com.example.myapplication.models.TransactionType
 import java.time.LocalDateTime
 import kotlin.random.Random
 
-data class DebitTransactionTemplate (
+data class DebitTransactionTemplate(
     val label: String,
     val category: Category
 )
 
-val movementsDescriptions = listOf<DebitTransactionTemplate>(DebitTransactionTemplate("Market", Category.MARKET), DebitTransactionTemplate("Taxi", Category.TRANSPORT), DebitTransactionTemplate("Food", Category.RESTAURANT), DebitTransactionTemplate("Games", Category.GENERAL))
-const val numberOfMovements = 5;
+val movementsDescriptions = listOf(
+    DebitTransactionTemplate("Market", Category.MARKET),
+    DebitTransactionTemplate("Taxi", Category.TRANSPORT),
+    DebitTransactionTemplate("Food", Category.RESTAURANT),
+    DebitTransactionTemplate("Games", Category.GENERAL)
+)
+const val numberOfMovements = 30;
 const val minValue = 5.0;
 const val maxValue = 100.0;
 
@@ -28,41 +33,26 @@ object TransactionService {
         generateDebitTransactions()
     }
 
-    private fun generateCredit () {
+    private fun generateCredit() {
+        generateCompanyCredit(Category.RESTAURANT, 1000.0)
+        generateCompanyCredit(Category.TRANSPORT, 1000.0)
+        generateCompanyCredit(Category.MARKET, 500.0)
+        generateCompanyCredit(Category.GENERAL, 500.0)
+    }
+
+    private fun generateCompanyCredit(category: Category, value: Double) {
         val id = (transactions.size + 1).toString()
         val credit = Transaction(
             id,
-            1000.0,
+            value,
             "Company",
             LocalDateTime.now().minusDays(numberOfMovements.toLong()),
-            Category.RESTAURANT,
-            TransactionType.CREDIT
-        )
-
-        val credit2 = Transaction(
-            id,
-            1000.0,
-            "Company",
-            LocalDateTime.now().minusDays(numberOfMovements.toLong()),
-            Category.TRANSPORT,
-            TransactionType.CREDIT
-        )
-
-        val credit3 = Transaction(
-            id,
-            500.0,
-            "Company",
-            LocalDateTime.now().minusDays(numberOfMovements.toLong()),
-            Category.MARKET,
+            category,
             TransactionType.CREDIT
         )
 
         transactions.add(credit)
-        transactions.add(credit2)
-        transactions.add(credit3)
-        restaurantBalance += credit.value;
-        transportBalance += credit2.value;
-        marketBalance += credit3.value
+        addCategorizedBalance(credit.value, credit.category)
     }
 
     private fun generateDebitTransactions() {
@@ -88,36 +78,40 @@ object TransactionService {
     }
 
     fun getTransactions(): MutableList<Transaction> {
-        return transactions.sortedByDescending  {it.date}.toMutableList()
+        return transactions.sortedByDescending { it.date }.toMutableList()
     }
 
     private fun subtractCategorizedBalance(value: Double, category: Category) {
+        if (category == Category.GENERAL) {
+            balance -= value;
+        } else {
+            val availableBalance = getBalanceByCategory(category)
 
-                if (category == Category.GENERAL) {
-                    balance -= value;
-                } else {
-                    val availableBalance = getBalanceByCategory(category)
+            val subtractedBalance = availableBalance - value;
 
-                    val subtractedBalance = availableBalance - value;
+            if (subtractedBalance < 0) {
+                balance += subtractedBalance
+                setCategoryBalance(0.0, category)
+            } else {
+                setCategoryBalance(subtractedBalance, category)
+            }
+        }
 
-                    if (subtractedBalance < 0) {
-                        balance += subtractedBalance
-                        when (category) {
-                            Category.MARKET -> marketBalance = 0.0
-                            Category.TRANSPORT -> transportBalance = 0.0
-                            Category.RESTAURANT -> restaurantBalance = 0.0
-                            else -> throw IllegalStateException("Invalid category param value");
-                        }
-                    } else {
-                        when (category) {
-                            Category.MARKET -> marketBalance = subtractedBalance
-                            Category.TRANSPORT -> transportBalance = subtractedBalance
-                            Category.RESTAURANT -> restaurantBalance = subtractedBalance
-                            else -> throw IllegalStateException("Invalid category param value")
-                        }
-                    }
-                }
+    }
 
+    private fun addCategorizedBalance(value: Double, category: Category) {
+        val currentBalance = getBalanceByCategory(category)
+        val newBalance = currentBalance + value
+        setCategoryBalance(newBalance, category)
+    }
+
+    private fun setCategoryBalance(value: Double, category: Category) {
+        when (category) {
+            Category.MARKET -> marketBalance = value
+            Category.TRANSPORT -> transportBalance = value
+            Category.RESTAURANT -> restaurantBalance = value
+            Category.GENERAL -> balance = value
+        }
     }
 
     fun getBalance(): Double {
@@ -134,9 +128,9 @@ object TransactionService {
     }
 
     fun getCreditTransactions(): MutableList<Transaction> {
-        return transactions.filter {transaction ->
+        return transactions.filter { transaction ->
             transaction.transactionType == TransactionType.CREDIT
-        }.sortedByDescending { it.date}.toMutableList()
+        }.sortedByDescending { it.date }.toMutableList()
     }
 
     fun recharge(value: Double, description: String) {
