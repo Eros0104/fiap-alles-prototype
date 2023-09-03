@@ -17,40 +17,35 @@ import com.example.myapplication.R
 import com.example.myapplication.RechargeActivity
 import com.example.myapplication.StatementActivity
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.models.Category
 import com.example.myapplication.services.TransactionService
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        // Inflate the layout XML file and return a binding object instance
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-
         val root: View = binding.root
 
-        val txtBalance: TextView = binding.txtBalance
-        viewModel.textBalance.observe(viewLifecycleOwner) {
-            txtBalance.text = it
-        }
-
-        viewModel.setTextBalance(getString(R.string.balance))
-
+        initializeViewModel()
         setButtons()
 
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setBalance()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,16 +56,58 @@ class HomeFragment : Fragment() {
         setBalance()
     }
 
+    private fun initializeViewModel() {
+        val txtBalance: TextView = binding.txtBalanceValue
+        val txtTransportBalance: TextView = binding.txtTransportBalance
+        val txtMarketBalance: TextView = binding.txtMarketBalance
+        val txtRestaurantBalance: TextView = binding.txtRestaurantBalance
+        val txtGeneralBalance: TextView = binding.txtGeneralBalance
+
+
+        viewModel.textBalance.observe(viewLifecycleOwner) {
+            txtBalance.text = it
+        }
+
+        viewModel.setTextBalance("")
+
+        viewModel.textBalances.forEach { (category, liveData) ->
+            liveData.observe(viewLifecycleOwner) {
+                when (category) {
+                    Category.MARKET -> txtMarketBalance.text = it
+                    Category.TRANSPORT -> txtTransportBalance.text = it
+                    Category.RESTAURANT -> txtRestaurantBalance.text = it
+                    Category.GENERAL -> txtGeneralBalance.text = it
+                }
+            }
+            viewModel.setTextCategoryBalance(category, "")
+        }
+    }
+
     private fun setBalance() {
         val transactionService = TransactionService
         val nf: NumberFormat = NumberFormat.getCurrencyInstance()
         nf.maximumFractionDigits = 2
-        nf.currency = Currency.getInstance("BRL");
+        nf.currency = Currency.getInstance("BRL")
 
-        val balance = getString(R.string.balance) + " "
         val balanceValue = nf.format(transactionService.getBalance())
+        viewModel.setTextBalance(balanceValue)
 
-        viewModel.setTextBalance(balance + balanceValue)
+        Category.values().forEach { category ->
+            val balanceValue = transactionService.getBalanceByCategory(category)
+            val formattedBalanceValue = nf.format(balanceValue)
+            val label = getBalanceLabel(category)
+
+            viewModel.setTextCategoryBalance(category, label + formattedBalanceValue)
+        }
+    }
+
+    private fun getBalanceLabel(category: Category): String {
+        return when (category) {
+            Category.MARKET -> getString(R.string.market_balance_label)
+            Category.TRANSPORT -> getString(R.string.transport_balance_label)
+            Category.RESTAURANT -> getString(R.string.restaurant_balance_label)
+            Category.GENERAL -> getString(R.string.general_balance_label)
+        }
     }
 
     private fun setButtons() {

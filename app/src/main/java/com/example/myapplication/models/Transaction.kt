@@ -3,13 +3,20 @@ package com.example.myapplication.models
 import java.time.LocalDateTime
 
 enum class TransactionType {
-    DEBIT,
-    CREDIT
+    CREDIT,
+    DEBIT
 }
-data class Transaction(
+enum class Category {
+    MARKET,
+    RESTAURANT,
+    TRANSPORT,
+    GENERAL
+}
+class Transaction(
     val id: String,
     val value: Double,
     val description: String,
-    val transactionType: TransactionType,
-    val date: LocalDateTime
+    val date: LocalDateTime,
+    val category: Category,
+    val transactionType: TransactionType
 )
