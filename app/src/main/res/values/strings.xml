@@ -28,4 +28,8 @@
     <string name="nav_header_subtitle">john@example.com</string>
     <string name="action_settings">Configurações</string>
     <string name="balance_categories">Categorias de saldo</string>
+    <string name="market_balance_label">"Mercado: "</string>
+    <string name="transport_balance_label">"Transporte: "</string>
+    <string name="restaurant_balance_label">"Refeição: "</string>
+    <string name="general_balance_label">"Saldo livre: "</string>
 </resources>

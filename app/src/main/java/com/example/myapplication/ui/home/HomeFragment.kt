@@ -29,9 +29,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
@@ -105,10 +103,10 @@ class HomeFragment : Fragment() {
 
     private fun getBalanceLabel(category: Category): String {
         return when (category) {
-            Category.MARKET -> "Mercado: "
-            Category.TRANSPORT -> "Transporte: "
-            Category.RESTAURANT -> "Refeição: "
-            Category.GENERAL -> "Saldo livre: "
+            Category.MARKET -> getString(R.string.market_balance_label)
+            Category.TRANSPORT -> getString(R.string.transport_balance_label)
+            Category.RESTAURANT -> getString(R.string.restaurant_balance_label)
+            Category.GENERAL -> getString(R.string.general_balance_label)
         }
     }
 
