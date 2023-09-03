@@ -6,8 +6,13 @@ import com.example.myapplication.models.TransactionType
 import java.time.LocalDateTime
 import kotlin.random.Random
 
-val movementsDescriptions = listOf<String>("Market", "Taxi", "Food", "Games")
-const val numberOfMovements = 30;
+data class DebitTransactionTemplate (
+    val label: String,
+    val category: Category
+)
+
+val movementsDescriptions = listOf<DebitTransactionTemplate>(DebitTransactionTemplate("Market", Category.MARKET), DebitTransactionTemplate("Taxi", Category.TRANSPORT), DebitTransactionTemplate("Food", Category.RESTAURANT), DebitTransactionTemplate("Games", Category.GENERAL))
+const val numberOfMovements = 5;
 const val minValue = 5.0;
 const val maxValue = 100.0;
 
@@ -63,24 +68,22 @@ object TransactionService {
     private fun generateDebitTransactions() {
         repeat(numberOfMovements) { index ->
             val randomIndex = Random.nextInt(movementsDescriptions.size)
-            val randomMovementDescription = movementsDescriptions[randomIndex]
+            val randomTransactionTemplate = movementsDescriptions[randomIndex]
             val randomValue = Random.nextDouble(minValue, maxValue)
             val movementId = index.toString()
             val date = LocalDateTime.now().minusDays(index.toLong())
 
-            val randomCategory = Category.values().random()
-
             val movement = Transaction(
                 movementId,
                 randomValue,
-                randomMovementDescription,
+                randomTransactionTemplate.label,
                 date,
-                randomCategory,
+                randomTransactionTemplate.category,
                 TransactionType.DEBIT
             )
 
             transactions.add(movement)
-            subtractCategorizedBalance(movement.value, randomCategory)
+            subtractCategorizedBalance(movement.value, randomTransactionTemplate.category)
         }
     }
 
