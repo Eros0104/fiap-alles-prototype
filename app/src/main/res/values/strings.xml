@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">"Alle's Benefícios"</string>
-    <string name="password">Password (123)</string>
-    <string name="username">Usuário (john)</string>
+    <string name="password">Senha</string>
+    <string name="username">Email</string>
     <string name="login">Login</string>
     <string name="statement">Extrato</string>
     <string name="recharge">Recarregar</string>
