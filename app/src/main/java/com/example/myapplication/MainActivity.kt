@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
 
-            if (username == "john" && password == "123") {
+            if (username == "katia@email.com" && password == "@senhasegura1!34") {
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             }
