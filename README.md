@@ -1,6 +1,5 @@
 # APP Alles Benefícios
 Este é um guia passo a passo sobre como rodar um projeto Android básico usando Kotlin. Certifique-se de ter o Android Studio instalado em seu sistema antes de começar.
-- Vídeo do You
 
 ## Pré-requisitos
 - [Android Studio](https://developer.android.com/studio) instalado em seu sistema.
