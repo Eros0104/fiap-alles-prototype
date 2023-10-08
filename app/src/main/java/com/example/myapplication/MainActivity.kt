@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import com.example.myapplication.models.LoginParameters
+import com.example.myapplication.services.AuthService
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,8 +20,9 @@ class MainActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
+            val loginParameters = LoginParameters(username, password)
 
-            if (username == "katia@email.com" && password == "@senhasegura1!34") {
+            if (AuthService().login(loginParameters)) {
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             }

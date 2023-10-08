@@ -11,15 +11,15 @@ data class DebitTransactionTemplate(
     val category: Category
 )
 
-val movementsDescriptions = listOf(
+private val movementsDescriptions = listOf(
     DebitTransactionTemplate("Market", Category.MARKET),
     DebitTransactionTemplate("Taxi", Category.TRANSPORT),
     DebitTransactionTemplate("Food", Category.RESTAURANT),
     DebitTransactionTemplate("Games", Category.GENERAL)
 )
-const val numberOfMovements = 30;
-const val minValue = 5.0;
-const val maxValue = 100.0;
+private const val NUMBER_OF_MOVEMENTS = 30;
+private const val MIN_VALUE = 5.0;
+private const val MAX_VALUE = 100.0;
 
 object TransactionService {
     private val transactions = mutableListOf<Transaction>()
@@ -46,7 +46,7 @@ object TransactionService {
             id,
             value,
             "Company",
-            LocalDateTime.now().minusDays(numberOfMovements.toLong()),
+            LocalDateTime.now().minusDays(NUMBER_OF_MOVEMENTS.toLong()),
             category,
             TransactionType.CREDIT
         )
@@ -56,10 +56,10 @@ object TransactionService {
     }
 
     private fun generateDebitTransactions() {
-        repeat(numberOfMovements) { index ->
+        repeat(NUMBER_OF_MOVEMENTS) { index ->
             val randomIndex = Random.nextInt(movementsDescriptions.size)
             val randomTransactionTemplate = movementsDescriptions[randomIndex]
-            val randomValue = Random.nextDouble(minValue, maxValue)
+            val randomValue = Random.nextDouble(MIN_VALUE, MAX_VALUE)
             val movementId = index.toString()
             val date = LocalDateTime.now().minusDays(index.toLong())
 
